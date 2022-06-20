@@ -8,6 +8,9 @@ const transactionSchema = new mongoose.Schema({
         ref:'member',
         required:true
     },
+    Saving:{
+        type:Number
+    },
     Lone:{
         type:Number,
     },
