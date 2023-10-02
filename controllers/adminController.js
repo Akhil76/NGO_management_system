@@ -1,5 +1,5 @@
 const asynchandler = require('express-async-handler');
-const adminModel = require('../models/adminModel');
+const stuffModel = require('../models/stuff');
 
 
 
