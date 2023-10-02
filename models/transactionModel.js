@@ -11,14 +11,11 @@ const transactionSchema = new mongoose.Schema({
     Saving:{
         type:Number
     },
-    Lone:{
-        type:Number,
-    },
     Installment:{
         type:Number
     },
-    Balance:{
-        type:SVGAnimatedNumber
+    LoneBalance:{
+        type:Number
     }
 });
 

@@ -6,6 +6,15 @@ const MemberSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    Father:{
+        type:String,
+        required:true
+    },
+    Mother:{
+        type:String,
+        required:true
+    },
+
     Nid:{
         type:Number,
         required:true
@@ -22,12 +31,37 @@ const MemberSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    Picture:{
+        type:String
+    },
+    Lone:[
+        {
+            LoneAmount:{
+                type:String
+                },
+            LoneType:{
+                type:String
+            },
+            Duraton:{
+                type:String
+            },
+            Date: { 
+                type:Date,
+                default:new Date()
+                },
+            status:{
+                type:String,
+                enum:["Running","Paid"]
+            }
+        }
+    ],
     Transaction:[
         {
             type:Schema.Types.ObjectId,
             ref:'transaction'
         }
-    ]
+    ],
+    
 
 })
 
