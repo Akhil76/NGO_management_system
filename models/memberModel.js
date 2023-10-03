@@ -45,6 +45,9 @@ const MemberSchema = new mongoose.Schema({
             Duraton:{
                 type:String
             },
+            Interest:{
+                type:String
+            },
             Date: { 
                 type:Date,
                 default:new Date()
@@ -52,6 +55,9 @@ const MemberSchema = new mongoose.Schema({
             status:{
                 type:String,
                 enum:["Running","Paid"]
+            },
+            TotalAmount:{
+                type:Number
             }
         }
     ],
