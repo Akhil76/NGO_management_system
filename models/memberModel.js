@@ -58,6 +58,9 @@ const MemberSchema = new mongoose.Schema({
             },
             TotalAmount:{
                 type:Number
+            },
+            Comment:{
+                type:String
             }
         }
     ],

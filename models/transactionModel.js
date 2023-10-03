@@ -12,7 +12,7 @@ const transactionSchema = new mongoose.Schema({
         type:Number
     },
     Withdraw:{
-
+        type:Number
     },
     Installment:{
         type:Number
