@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 
 const balanceSchema = new mongoose.Schema({
+    
     MainBalance:{
-        type:String,
-        required:true
+        type:Number,
     },
     Date: { 
         type:Date,

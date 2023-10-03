@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
 
-
 const expenseSchema = new mongoose.Schema({
+    
     Stuff_id:{
+        type:String,
+        required:true
+    },
+    Brance:{
         type:String,
         required:true
     },
@@ -17,10 +21,6 @@ const expenseSchema = new mongoose.Schema({
     },
     Year:{
         type:Number,
-        required:true
-    },
-    Brance:{
-        type:String,
         required:true
     },
     Date: { 

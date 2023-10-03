@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 
 
 const expenseSchema = new mongoose.Schema({
+    Amount:{
+        type:Number,
+        required:true
+    },
     Purpose:{
         type:String,
         required:true
