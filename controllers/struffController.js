@@ -3,25 +3,33 @@ const stuffModel = require('../models/stuff');
 
 
 
-const adminCreate = asynchandler(async(req,res)=>{
+const stuffCreate = asynchandler(async(req,res)=>{
     try{
+        const Name ="Akhil Kumar Paul"
         const UserName = "Akhil";
         const Password="akhil1234";
         const Role = "admin";
-        const Post = "MD"
+        const Post = "MD";
+        const Mobile = "";
+        Email = "";
+        Picture = "";
 
 
-        const adminData = new adminModel({
+        const stuffData = new stuffModel({
+            Name,
             UserName,
             Password,
             Role,
-            Post
+            Post,
+            Mobile,
+            Email,
+            Picture
         })
 
-        const newAdmin = await adminData.save();
+        const newStuff = await stuffData.save();
         res.status(200).json({
             message:"Admin is created successfully.",
-            newAdmin
+            newStuff
         })
 
     }catch(error){
@@ -32,4 +40,4 @@ const adminCreate = asynchandler(async(req,res)=>{
 })
 
 
-module.exports = adminCreate;
+module.exports = stuffCreate;

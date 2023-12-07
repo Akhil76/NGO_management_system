@@ -8,6 +8,11 @@ const transactionSchema = new mongoose.Schema({
         ref:'member',
         required:true
     },
+    StuffId:{
+        type:Schema.Types.ObjectId,
+        ref:'stuff',
+        required:true
+    },
     Saving:{
         type:Number
     },
@@ -19,6 +24,10 @@ const transactionSchema = new mongoose.Schema({
     },
     LoneBalance:{
         type:Number
+    },
+    Date: { 
+        type:Date,
+        default:new Date()
     }
 });
 
