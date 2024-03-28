@@ -15,7 +15,7 @@ const memberCreate = asynchandler(async(req,res)=>{
         const BranceName = "";
         const Picture ="";
 
-        const memberData = new memberCreate({
+        const memberData = await new memberModel({
             Name,
             Father,
             Mother,

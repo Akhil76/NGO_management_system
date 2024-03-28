@@ -19,8 +19,12 @@ const stuffSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    Post:{
+    PostName:{
         type:String
+    },
+    BranceName:{
+        type:String,
+        required:true
     },
     Mobile:{
         type:Number,

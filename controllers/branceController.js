@@ -1,27 +1,16 @@
 const asynchandler = require('express-async-handler');
-const balanceModel = require('../models/BalanceModel');
+const branceModel = require('../models/BranceModel');
 
 
 
 const branceCreate = asynchandler(async(req,res)=>{
 
     try{
-        const BranceName =""
-        const Address = "";
-        const Stuff_Id="";
-        const Member_Id = "";
-        const Post = "";
-        const Mobile = "";
-
-        const branceData = new branceCreate({
+        const BranceName ="Koya";
+        const Address = "Kaya Bazar";
+        const branceData = await new branceModel({
             BranceName,
             Address,
-            Stuff_Id,
-            Member_Id,
-            Post,
-            Mobile,
-            Email,
-            Picture
         })
 
         const newBrance = await branceData.save();

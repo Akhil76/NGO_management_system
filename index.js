@@ -15,7 +15,7 @@ app.use('/',router);
 
 const PORT = process.env.PORT;
 Db_url = `mongodb+srv://${process.env.User}:${process.env.Password}@bank.klnpa.mongodb.net/${process.env.DbName}?retryWrites=true&w=majority`;
-
+DB_url2 = `const uri = "mongodb+srv://akhilpaul2011:dJ0nArHrVGXxJIa0@cluster0.hmjchkc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";`
 app.listen(PORT,()=>{
     console.log(`Server is running on PORT ${PORT}`);
     mongoose.connect(Db_url,{
@@ -28,6 +28,7 @@ app.listen(PORT,()=>{
     })
     .catch(()=>{
         console.log('Database is not connected!'); 
+        
     })
 
 });

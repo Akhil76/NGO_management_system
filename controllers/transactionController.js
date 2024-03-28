@@ -13,7 +13,7 @@ const transactionCreate = asynchandler(async(req,res)=>{
         const Installment = "";
         const LoneBalance = "";
 
-        const transactionData = new transactionCreate({
+        const transactionData = await new transactionModel({
             MemberId,
             StuffId,
             Saving,

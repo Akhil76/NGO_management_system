@@ -1,5 +1,5 @@
 const asynchandler = require('express-async-handler');
-const stuffModel = require('../models/stuff');
+const stuffModel = require('../models/stuffModel');
 
 
 
@@ -10,17 +10,19 @@ const stuffCreate = asynchandler(async(req,res)=>{
         const Password="akhil1234";
         const Role = "admin";
         const Post = "MD";
-        const Mobile = "";
-        Email = "";
-        Picture = "";
+        const BranceName ="Koya";
+        const Mobile = "01754444444";
+        const Email = "akhil@gmail.com";
+        const Picture = "";
 
 
-        const stuffData = new stuffModel({
+        const stuffData = await new stuffModel({
             Name,
             UserName,
             Password,
             Role,
             Post,
+            BranceName,
             Mobile,
             Email,
             Picture
