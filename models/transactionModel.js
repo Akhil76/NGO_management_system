@@ -16,6 +16,9 @@ const transactionSchema = new mongoose.Schema({
     Saving:{
         type:Number
     },
+    SavingBalance:{
+        type:Number
+    },
     Withdraw:{
         type:Number
     },

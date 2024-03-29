@@ -1,5 +1,6 @@
 const asynchandler = require('express-async-handler');
 const transactionModel = require('../models/transactionModel');
+const memberModel = require('../models/memberModel');
 
 
 
@@ -12,7 +13,8 @@ const transactionCreate = asynchandler(async(req,res)=>{
         const Withdraw = "";
         const Installment = "";
         const LoneBalance = "";
-
+        const loneBalance = await memberModel.find({Lone:{LoneBalance}});
+        
         const transactionData = await new transactionModel({
             MemberId,
             StuffId,
@@ -20,6 +22,7 @@ const transactionCreate = asynchandler(async(req,res)=>{
             Withdraw,
             Installment,
             LoneBalance,
+            SavingBalance,
         })
 
         const newTransaction = await transactionData.save();

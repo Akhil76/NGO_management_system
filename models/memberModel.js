@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MemberSchema = new mongoose.Schema({
+    AccountNo:{
+        type:Number,
+        required:true
+    },
     Name:{
         type:String,
         required:true
@@ -34,19 +38,26 @@ const MemberSchema = new mongoose.Schema({
     Picture:{
         type:String
     },
+    SavingsBalance:{
+        type:Number
+    },
+    LoneBalance:{
+        type:Number
+    },
     Lone:[
         {
             LoneAmount:{
-                type:String
+                type:Number,
                 },
             LoneType:{
-                type:String
+                type:String,
+                enum:["Weekly","Monthly"]
             },
             Duraton:{
                 type:String
             },
             Interest:{
-                type:String
+                type:Number
             },
             Date: { 
                 type:Date,
@@ -70,9 +81,7 @@ const MemberSchema = new mongoose.Schema({
             ref:'transaction'
         }
     ],
-    
-
-})
+});
 
 
 const memberModel = mongoose.model('member',MemberSchema);
