@@ -1,37 +1,85 @@
 const asynchandler = require('express-async-handler');
 const transactionModel = require('../models/transactionModel');
 const memberModel = require('../models/memberModel');
+const balanceModel = require('../models/BalanceModel')
 
 
 
 const transactionCreate = asynchandler(async(req,res)=>{
 
     try{
-        const MemberId =""
-        const StuffId = "";
-        const Saving="";
-        const Withdraw = "";
-        const Installment = "";
-        const LoneBalance = "";
-        const loneBalance = await memberModel.find({Lone:{LoneBalance}});
+        const {
+        MemberId,
+        StuffId,
+        Saving,
+        Withdraw,
+        Installment
+        }=req.body
         
+        const member = await memberModel.findById({_id:MemberId});
+        const previousLoneBalance = member.LoneBalance;
+        const previousSavingsBalance = member.SavingsBalance;
+
+        const balance = await balanceModel.findOne();
+        const balanceId = balance._id;
+        const preMainBalance = balance.MainBalance;
+        
+       
+        let savingsBalance = previousSavingsBalance;
+        let loneBalance = previousLoneBalance;
+        let mainBalance = preMainBalance;
+        
+        if (Saving) {
+            savingsBalance +=Saving;
+            mainBalance += Saving;
+            console.log(mainBalance);
+        } 
+        if (Withdraw) {
+            savingsBalance -= Withdraw;
+            mainBalance -= Withdraw;
+        }
+      
+        if (Installment) {
+       
+           loneBalance -= Installment;
+           mainBalance += Installment;
+        }
         const transactionData = await new transactionModel({
             MemberId,
             StuffId,
             Saving,
             Withdraw,
             Installment,
-            LoneBalance,
-            SavingBalance,
         })
 
         const newTransaction = await transactionData.save();
+        const pushTransactionId = await memberModel.findOneAndUpdate(
+            {_id:transactionData.MemberId},
+            {
+                $push:{Transaction:newTransaction._id}
+            }
+        );
+        const updateBalance = await memberModel.findByIdAndUpdate(
+            {_id:MemberId},
+            {SavingsBalance:savingsBalance,LoneBalance:loneBalance},
+            {new:true}
+        );
+    
+        const updateMainBalance = await balanceModel.findByIdAndUpdate(
+            {_id:balanceId},
+            {MainBalance:mainBalance},
+            {new:true}
+            );
         res.status(200).json({
             message:"Transaction is created successfully.",
-            newTransaction
+            newTransaction,
+            updateBalance,
+            pushTransactionId,
+            updateMainBalance
         })
 
     }catch(error){
+        console.log(error);
         res.status(401).json({
             error:"Server error occurred!"
         })

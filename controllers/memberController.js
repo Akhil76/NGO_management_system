@@ -1,5 +1,6 @@
 const asynchandler = require('express-async-handler');
 const memberModel = require('../models/memberModel');
+const branceModel = require('../models/BranceModel');
 
 
 
@@ -9,10 +10,11 @@ const memberCreate = asynchandler(async(req,res)=>{
         const Name ="Tushar Paul"
         const Father = "Anil Paul";
         const Mother="Ira rani Paul";
-        const Nid = "77777777777777";
+        const Nid = "77777777777";
         const Mobile = "0176666666666";
         const Address = "Koya,KumarKhali,Kushtia";
         const BranceName = "Koya";
+        const BranceId = "660f963b7a47d0d933982cd4"
         const Picture ="";
 
         const allMembers = await memberModel.find();
@@ -31,9 +33,16 @@ const memberCreate = asynchandler(async(req,res)=>{
         })
 
         const newMember = await memberData.save();
+        const pushId = await branceModel.findOneAndUpdate(
+            { _id: BranceId},
+            {
+                $push:{ Member_Id:newMember._id}
+            }
+        );
         res.status(200).json({
             message:"Member is created successfully.",
-            newMember
+            newMember,
+            pushId
         })
 
     }catch(error){

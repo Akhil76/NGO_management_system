@@ -39,10 +39,12 @@ const MemberSchema = new mongoose.Schema({
         type:String
     },
     SavingsBalance:{
-        type:Number
+        type:Number,
+        default:0
     },
     LoneBalance:{
-        type:Number
+        type:Number,
+        default:0
     },
     Lone:[
         {
