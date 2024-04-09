@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 
 
 const stuffSchema = new mongoose.Schema({
@@ -35,8 +35,14 @@ const stuffSchema = new mongoose.Schema({
     },
     Picture:{
         type:String
-    }
-})
+    },
+    Transaction:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'transaction'
+        }
+    ],
+});
 
 const stuffModel = mongoose.model('stuff',stuffSchema);
 module.exports=stuffModel;

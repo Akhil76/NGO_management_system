@@ -13,6 +13,10 @@ const transactionSchema = new mongoose.Schema({
         ref:'stuff',
         required:true
     },
+    StuffName:{
+        type:String,
+        required:true
+    },
     Saving:{
         type:Number
     },

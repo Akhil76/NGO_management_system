@@ -7,10 +7,15 @@ const expenseSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    Name:{
+        type:String,
+        required:true
+    },
     Brance:{
         type:String,
         required:true
     },
+    
     SalaryAmount:{
         type:Number,
         required:true

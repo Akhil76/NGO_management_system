@@ -2,6 +2,7 @@ const asynchandler = require('express-async-handler');
 const transactionModel = require('../models/transactionModel');
 const memberModel = require('../models/memberModel');
 const balanceModel = require('../models/BalanceModel')
+const stuffModel = require('../models/stuffModel');
 
 
 
@@ -11,6 +12,7 @@ const transactionCreate = asynchandler(async(req,res)=>{
         const {
         MemberId,
         StuffId,
+        StuffName,
         Saving,
         Withdraw,
         Installment
@@ -47,14 +49,23 @@ const transactionCreate = asynchandler(async(req,res)=>{
         const transactionData = await new transactionModel({
             MemberId,
             StuffId,
+            StuffName,
             Saving,
             Withdraw,
             Installment,
         })
 
         const newTransaction = await transactionData.save();
-        const pushTransactionId = await memberModel.findOneAndUpdate(
+        // push transaction into memberDB 
+        const pushTransMember = await memberModel.findOneAndUpdate(
             {_id:transactionData.MemberId},
+            {
+                $push:{Transaction:newTransaction._id}
+            }
+        );
+        // push transaction into stuffDB
+        const pushTransStuff = await stuffModel.findOneAndUpdate(
+            {_id:transactionData.StuffId},
             {
                 $push:{Transaction:newTransaction._id}
             }
@@ -74,7 +85,8 @@ const transactionCreate = asynchandler(async(req,res)=>{
             message:"Transaction is created successfully.",
             newTransaction,
             updateBalance,
-            pushTransactionId,
+            pushTransMember,
+            pushTransStuff,
             updateMainBalance
         })
 
@@ -86,5 +98,15 @@ const transactionCreate = asynchandler(async(req,res)=>{
     }
 })
 
+const allTransactions = asynchandler(async(req,res)=>{
+    try{
+       const allTransactions = await transactionModel.find();
+       res.status(200).json(allTransactions);
+    }catch(error){
+        res.status(401).json({
+            error:"Server error occurred!"
+        })
+    }
+})
 
-module.exports = transactionCreate;
+module.exports = {transactionCreate,allTransactions};

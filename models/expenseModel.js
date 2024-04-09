@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 
-
 const expenseSchema = new mongoose.Schema({
     Amount:{
         type:Number,
@@ -19,11 +18,15 @@ const expenseSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    BranceId:{
+        type:String,
+        required:true
+    },
     Date: { 
         type:Date,
         default:new Date()
     }
-})
+});
 
 const expenseModel = mongoose.model('expense',expenseSchema);
-module.exports=expenseModel;
+module.exports= expenseModel;

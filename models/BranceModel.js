@@ -8,6 +8,10 @@ const branceSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    BranceBalance: {
+        type: Number,
+        required: true
+    },
     Address:{
         type:String,
         required:true
@@ -28,7 +32,7 @@ const branceSchema = new mongoose.Schema({
         type:Date,
         default:new Date()
     }
-})
+});
 
 const branceModel = mongoose.model('brance',branceSchema);
 module.exports=branceModel;

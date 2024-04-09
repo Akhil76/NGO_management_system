@@ -3,28 +3,43 @@ const branceModel = require('../models/BranceModel');
 
 
 
-const branceCreate = asynchandler(async(req,res)=>{
+const branceCreate = asynchandler(async (req, res) => {
 
-    try{
-        const BranceName ="Koya";
-        const Address = "Kaya Bazar";
-        const branceData = await new branceModel({
+    try {
+        const {
             BranceName,
             Address,
+            BranceBalance
+        } = req.body;
+
+        branceData = await new branceModel({
+            BranceName,
+            Address,
+            BranceBalance
         })
 
         const newBrance = await branceData.save();
         res.status(200).json({
-            message:"Brance is created successfully.",
+            message: "Brance is created successfully.",
             newBrance
         })
 
-    }catch(error){
+    } catch (error) {
         res.status(401).json({
-            error:"Server error occurred!"
+            error: "Server error occurred!"
+        })
+    }
+})
+const allBrances = asynchandler(async (req, res) => {
+    try {
+        const allBrances = await branceModel.find();
+        res.status(200).json(allBrances);
+    } catch (error) {
+        res.status(401).json({
+            error: "Server error occurred!"
         })
     }
 })
 
 
-module.exports = branceCreate;
+module.exports = { branceCreate, allBrances };

@@ -5,7 +5,7 @@ const balanceModel = require('../models/BalanceModel');
 const mainBalance = asynchandler(async(req,res)=>{
 
     try{
-        const MainBalance="50000"
+        const MainBalance = req.body;
         const balanceData = await new balanceModel({
             MainBalance
         })
@@ -14,7 +14,7 @@ const mainBalance = asynchandler(async(req,res)=>{
         res.status(200).json({
             message:"MainBalance is added successfully.",
             newBalance
-        })
+        });
 
     }catch(error){
         res.status(401).json({
