@@ -40,6 +40,16 @@ const allBrances = asynchandler(async (req, res) => {
         })
     }
 })
+const singleBrance = asynchandler(async (req, res) => {
+    try {
+        const branceId = req.params.id;
+        const singleBrance = await branceModel.find({_id:branceId});
+        res.status(200).json(singleBrance);
+    } catch (error) {
+        res.status(401).json({
+            error: "Server error occurred!"
+        })
+    }
+})
 
-
-module.exports = { branceCreate, allBrances };
+module.exports = { branceCreate, allBrances,singleBrance };

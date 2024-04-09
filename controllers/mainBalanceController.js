@@ -23,5 +23,14 @@ const mainBalance = asynchandler(async(req,res)=>{
     }
 })
 
-
-module.exports = mainBalance;
+const displayMainBalance = asynchandler(async (req, res) => {
+    try {
+        const mainBalance = await balanceModel.find();
+        res.status(200).json(mainBalance);
+    } catch (error) {
+        res.status(500).json({
+            error: "Server side error occurred!"
+        })
+    }
+});
+module.exports = {mainBalance,displayMainBalance};

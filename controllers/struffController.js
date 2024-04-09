@@ -51,6 +51,28 @@ const stuffCreate = asynchandler(async (req, res) => {
         })
     }
 })
+const allstuffs = asynchandler(async (req, res) => {
+    try {
+        const allstuffs = await stuffModel.find();
+        res.status(200).json(allstuffs);
 
+    } catch (error) {
+        res.status(500).json({
+            error: "Server side error occurred!"
+        })
+    }
+});
+const singleStuff = asynchandler(async (req, res) => {
+    try {
+        const stuffId = req.params.id;
+        const singleStuff = await stuffModel.find({_id:stuffId});
+        res.status(200).json(singleStuff);
 
-module.exports = stuffCreate;
+    } catch (error) {
+        res.status(500).json({
+            error: "Server side error occurred!"
+        })
+    }
+});
+
+module.exports = {stuffCreate,allstuffs,singleStuff};
