@@ -53,7 +53,7 @@ const MemberSchema = new mongoose.Schema({
                 },
             LoneType:{
                 type:String,
-                enum:["Weekly","Monthly"]
+                enum:["Daily","Weekly","Monthly"]
             },
             Duraton:{
                 type:String
@@ -67,7 +67,8 @@ const MemberSchema = new mongoose.Schema({
                 },
             status:{
                 type:String,
-                enum:["Running","Paid"]
+                enum:["Running","Paid"],
+                default:"Running"
             },
             TotalAmount:{
                 type:Number

@@ -23,7 +23,7 @@ const loneMaking = asynchandler(async (req, res) => {
             Interest,
             TotalAmount
         });
-        console.log(loneData)
+        
         const pushdata = await memberModel.updateOne(
             { _id: MemberId },
             {
@@ -35,6 +35,8 @@ const loneMaking = asynchandler(async (req, res) => {
             { LoneBalance: TotalAmount },
             { new: true }
         )
+        
+
         res.status(200).json({
             loneBalance: loneBalance,
             push: pushdata,
